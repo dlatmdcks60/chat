@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css?ver=1.0">
+    <script src="../js/restApi.js?ver=0.1"></script>
+    <title>로그인</title>
+</head>
+
+<body>
+    <div id="login">
+        <h2>Login</h2>
+        <span class="sub_title">Nodejs를 활용한 SPA채팅</span>
+        <div class="input">
+            <input class="userid" type="text" placeholder="아이디">
+            <input class="userpassword" type="password" placeholder="비밀번호">
+        </div>
+        <button class="login_btn" onclick="login();">로그인</button>
+        <div class="detail">
+            <span class="detail_1">테스트 계정_1</span>
+            <span class="detail_2">Id: testid1</span>
+            <span class="detail_3">Password: testpass1</span>
+        </div>
+        <div class="detail">
+            <span class="detail_1">테스트 계정_2</span>
+            <span class="detail_2">Id: testid2</span>
+            <span class="detail_3">Password: testpass2</span>
+        </div>
+        <div class="detail">
+            <span class="detail_1">테스트 계정_3</span>
+            <span class="detail_2">Id: testid3</span>
+            <span class="detail_3">Password: testpass3</span>
+        </div>
+    </div>
+    <script>
+        function login() {
+            const [id, password] = [document.querySelector(".userid").value, document.querySelector(".userpassword").value];
+            api.post('login', (resData) => {
+                if (resData.result === true) {
+                    location.replace("/chat?page=list");
+                } else {
+                    alert(resData.msg);
+                }
+            }, Object.freeze({
+                userId: id,
+                userPassword: password
+            }));
+        }
+    </script>
+</body>
+
+</html>
