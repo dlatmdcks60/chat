@@ -225,14 +225,16 @@ exports.getListData_chatlist = (userData) => {
             user u2 ON r.userId_2 = u2.userId
         LEFT JOIN 
             msg m ON r.roomId = m.roomId AND m.datetime = (
-                SELECT MAX(datetime)
-                FROM msg
-                WHERE roomId = r.roomId
-            )
+            SELECT MAX(STR_TO_DATE(datetime, '%Y%m%d%H%i%s'))
+            FROM msg
+            WHERE roomId = r.roomId
+        )
         LEFT JOIN 
             unread_msg um ON r.roomId = um.roomId AND um.userId = ${mysql.escape(userData.userId)}
         WHERE 
-            r.userId_1 = ${mysql.escape(userData.userId)} OR r.userId_2 = ${mysql.escape(userData.userId)};
+            r.userId_1 = ${mysql.escape(userData.userId)} OR r.userId_2 = ${mysql.escape(userData.userId)}
+        ORDER BY 
+            STR_TO_DATE(m.datetime, '%Y%m%d%H%i%s') DESC;
         `;
         mysql.query(selectQuery, (err, rows) => {
             if (!err) {
