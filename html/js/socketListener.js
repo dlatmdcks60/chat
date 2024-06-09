@@ -59,6 +59,8 @@ socket.on("res_msg", (data) => { //메시지 수신
                 if (spanData >= 0) {
                     divAll[i].querySelector(".list_info_3 span.room_num").classList.add("on");
                 }
+                parentElement.removeChild(divAll[i]);
+                parentElement.insertBefore(divAll[i], parentElement.firstChild);
             }
         }
     }
