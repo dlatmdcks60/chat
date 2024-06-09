@@ -56,7 +56,7 @@ socket.on("res_msg", (data) => { //메시지 수신
                 let spanData = Number(divAll[i].querySelector(".list_info_3 span.room_num").textContent);
                 divAll[i].querySelector(".list_info_3 span.room_num").textContent = spanData + 1;
                 divAll[i].querySelector(".list_info_2 span.user_detail").textContent = data[0].msg;
-                if (spanData > 0) {
+                if (spanData >= 0) {
                     divAll[i].querySelector(".list_info_3 span.room_num").classList.add("on");
                 }
             }
