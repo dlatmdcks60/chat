@@ -54,6 +54,7 @@ socket.on("res_msg", (data) => { //메시지 수신
             const dataId = divAll[i].getAttribute('data-userid');
             if (dataId === data[0].roomId) {
                 let spanData = Number(divAll[i].querySelector(".list_info_3 span.room_num").textContent);
+                const parentElement = document.querySelector("#content .contentList ul");
                 divAll[i].querySelector(".list_info_3 span.room_num").textContent = spanData + 1;
                 divAll[i].querySelector(".list_info_2 span.user_detail").textContent = data[0].msg;
                 if (spanData >= 0) {
